@@ -45,7 +45,7 @@ export const App = () => {
       setStatus(STATUS_PAGE.load);
 
       try {
-        const data = await fetchImage({ q, p, PER_PAGE });
+        const data = await fetchImage({ query: q, page: p, per_page: PER_PAGE });
 
         if (data.total === 0) {
           setStatus(STATUS_PAGE.noimage);
