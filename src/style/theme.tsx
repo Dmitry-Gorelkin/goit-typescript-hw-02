@@ -1,4 +1,20 @@
-export const theme = Object.freeze({
+export type Theme = {
+  colors: {
+    background: string;
+    backgroundSecondary: string;
+    backgroundimage: string;
+    title: string;
+    text: string;
+    textWhite: string;
+    textSecondary: string;
+    btn: string;
+    btnHover: string;
+    btnDisabled: string;
+    accent: string;
+  };
+};
+
+export const theme: Theme = Object.freeze({
   colors: {
     background: '#F4F4F9', // Основной фон сайта: светло-серый для чистого и нейтрального вида
     backgroundSecondary: '#2B3A67', // Второй фон сайта для хедера и футера: темно-синий для контраста

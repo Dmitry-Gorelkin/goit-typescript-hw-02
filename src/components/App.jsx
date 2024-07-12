@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { SearchBar } from './SearchBar/SearchBar';
@@ -45,7 +45,7 @@ export const App = () => {
       setStatus(STATUS_PAGE.load);
 
       try {
-        const data = await fetchImage(q, p, PER_PAGE);
+        const data = await fetchImage({ q, p, PER_PAGE });
 
         if (data.total === 0) {
           setStatus(STATUS_PAGE.noimage);
