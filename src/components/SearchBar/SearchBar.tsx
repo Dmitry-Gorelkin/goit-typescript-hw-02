@@ -2,10 +2,18 @@ import { FormButtomIcon, FormInput, FormInputContrainer } from '../UI/Form/Form.
 import { SearchBarContainer } from './SearchBar.styled';
 import { CiSearch } from 'react-icons/ci';
 import toast from 'react-hot-toast';
+import { FC, FormEvent } from 'react';
 
-export const SearchBar = ({ onQuery, value }) => {
-  const handlSubmit = e => {
+type SearchBarProps = {
+  onQuery: (q: string) => void;
+  value: string;
+};
+
+export const SearchBar: FC<SearchBarProps> = ({ onQuery, value }) => {
+  const handlSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.dir(e.target.elements.query.value);
 
     const query = e.target.query.value;
 
