@@ -13,9 +13,9 @@ export const SearchBar: FC<SearchBarProps> = ({ onQuery, value }) => {
   const handlSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.dir(e.target.elements.query.value);
-
-    const query = e.target.query.value;
+    const form = e.target as HTMLFormElement;
+    const queryInput = form.elements.namedItem('query') as HTMLInputElement;
+    const query = queryInput.value;
 
     if (query.trim() === '') {
       toast.error('Cannot send empty message.');

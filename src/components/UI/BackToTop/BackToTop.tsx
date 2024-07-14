@@ -1,11 +1,12 @@
 import ScrollToTop from 'react-scroll-to-top';
 import { CiHome } from 'react-icons/ci';
+import { FC } from 'react';
 
-export const BackToTop = () => {
+export const BackToTop: FC = () => {
   return (
     <ScrollToTop
       smooth
-      top="400"
+      top={400}
       color="#FFB74D"
       style={{
         width: '45px',

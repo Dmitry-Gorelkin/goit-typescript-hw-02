@@ -1,12 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import { Theme } from './theme';
 import 'modern-normalize';
 
-type ThemeProps = {
-  theme: Theme;
-};
-
-export const GlobalStyle = createGlobalStyle<ThemeProps>`
+export const GlobalStyle = createGlobalStyle`
     * {
     box-sizing: border-box;
     }

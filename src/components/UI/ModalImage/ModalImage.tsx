@@ -1,4 +1,12 @@
+import { FC } from 'react';
 import Modal from 'react-modal';
+
+type ModalImageProps = {
+  src: string;
+  alt: string;
+  isOpen: boolean;
+  closeModal: () => void;
+};
 
 const customStyles = {
   overlay: {
@@ -20,7 +28,7 @@ const customStyles = {
   },
 };
 
-export const ModalImage = ({ src, alt, isOpen, closeModal }) => {
+export const ModalImage: FC<ModalImageProps> = ({ src, alt, isOpen, closeModal }) => {
   return (
     <Modal
       isOpen={isOpen}

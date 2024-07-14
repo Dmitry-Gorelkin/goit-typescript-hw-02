@@ -2,13 +2,7 @@ import { ImageCard } from '../ImageCard/ImageCard';
 import { ImageGalleryList } from './ImageGallery.styled';
 import { FC, useState } from 'react';
 import { ModalImage } from '../UI/ModalImage/ModalImage';
-
-type Image = {
-  id: string;
-  webformatURL: string;
-  tags: string;
-  largeImageURL: string;
-};
+import { Image } from '../types';
 
 type ImageGalleryProps = {
   arrImage: Image[];
@@ -17,36 +11,38 @@ type ImageGalleryProps = {
 type ImgModal = {
   src: string;
   alt: string;
+  status: boolean;
 };
 
-export const ImageGallery: FC<ImageGalleryProps> = ({ arrImage }) => {
-  const [statusModal, setStatusModal] = useState<boolean>(false);
-  const [imgModal, setImgModal] = useState<ImgModal>({ src: '', alt: '' });
+const initialModal: ImgModal = { src: '', alt: '', status: false };
 
-  const openModal = ({ src, alt }: ImgModal): void => {
-    setStatusModal(true);
-    setImgModal({ src, alt });
+export const ImageGallery: FC<ImageGalleryProps> = ({ arrImage }) => {
+  const [imgModal, setImgModal] = useState<ImgModal>(initialModal);
+
+  const openModal = ({ src, alt, status }: ImgModal): void => {
+    setImgModal({ src, alt, status });
   };
 
   const closeModal = (): void => {
-    setStatusModal(false);
+    setImgModal(initialModal);
   };
+
   return (
     <>
       <ImageGalleryList>
-        {arrImage.map(({ id, webformatURL, tags, largeImageURL }) => (
+        {arrImage.map(({ id, src, alt, srcModal }) => (
           <ImageCard
             key={id}
-            src={webformatURL}
-            openModal={() => openModal({ src: largeImageURL, alt: tags })}
-            alt={tags}
+            src={src}
+            openModal={() => openModal({ src: srcModal, alt: alt, status: true })}
+            alt={alt}
           />
         ))}
       </ImageGalleryList>
       <ModalImage
         src={imgModal.src}
         alt={imgModal.alt}
-        isOpen={statusModal}
+        isOpen={imgModal.status}
         closeModal={closeModal}
       />
     </>
