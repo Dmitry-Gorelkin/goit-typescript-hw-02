@@ -6,20 +6,13 @@ import { Button } from './UI/Button/Button.styled';
 import { ConteinerSection } from './UI/ConteinerSection/ConteinerSection.styled';
 import { Loader } from './UI/Loader/Loader';
 import toast from 'react-hot-toast';
-import { fetchImage } from '../api';
+import { fetchImage, ResponsImage } from '../api';
 import { NoImage } from './NoImage/NoImage';
 import { Image } from './types';
 import { BackToTop } from './UI/BackToTop/BackToTop';
 
 type Query = string;
 type Page = number;
-
-type Respons = {
-  id: number;
-  webformatURL: string;
-  tags: string;
-  largeImageURL: string;
-};
 
 enum STATUS_PAGE {
   ideal = 'IDEAL',
@@ -65,12 +58,19 @@ export const App: FC = () => {
 
         setImageList(prev => [
           ...prev,
-          ...data.hits.map(({ id, webformatURL, tags, largeImageURL }: Respons) => ({
-            id,
-            src: webformatURL,
-            alt: tags,
-            srcModal: largeImageURL,
-          })),
+          ...data.hits.map(
+            ({
+              id,
+              webformatURL,
+              tags,
+              largeImageURL,
+            }: Pick<ResponsImage, 'id' | 'webformatURL' | 'tags' | 'largeImageURL'>) => ({
+              id,
+              src: webformatURL,
+              alt: tags,
+              srcModal: largeImageURL,
+            })
+          ),
         ]);
 
         const totalPage = Math.ceil(data.total / PER_PAGE);
